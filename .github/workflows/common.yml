@@ -1,0 +1,14 @@
+name: Echo Something
+
+on:
+  repository_dispatch:
+    types:
+      - trigger-second-workflow
+
+jobs:
+  echo-something:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo Message
+        run: echo "Hello from the second workflow!"

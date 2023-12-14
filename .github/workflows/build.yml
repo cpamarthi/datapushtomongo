@@ -21,24 +21,33 @@ jobs:
 
       - name: Run Python Script
         run: python test.py
-  print-variables:
-    needs: run-script
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print All Variables
-        run: |
-          env
-  print-collected-data:
-    needs: [run-script, print-variables]
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: Collect Data
+      - name: Trigger Second Workflow
         run: |
-           echo ${{ github.workflow }}
-           echo ${{ github.run_id}}
-           echo ${{ github.ref }}
-           echo ${{ needs.run-script.result }}
-           echo ${{ needs.run-script.created_at }}
-           echo ${{ github.run_created }}
-           echo ${{ github.run_updated }}
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"event_type": "trigger-second-workflow"}' \
+            https://api.github.com/repos/${{ github.repository }}/dispatches
+  # print-variables:
+  #   needs: run-script
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Print All Variables
+  #       run: |
+  #         env
+  # print-collected-data:
+  #   needs: [run-script]
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - name: Collect Data
+  #       run: |
+  #          echo ${{ github.workflow }}
+  #          echo ${{ github.run_id}}
+  #          echo ${{ github.ref }}
+  #          echo ${{ needs.run-script.result }}
+  #          echo ${{ needs.run-script.created_at }}
+  #          echo ${{ github.run_created }}
+  #          echo ${{ github.run_updated }}
+      
