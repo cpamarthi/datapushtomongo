@@ -22,13 +22,14 @@ jobs:
       - name: Run Python Script
         run: python test.py
   print-variables:
+    needs: run-script
     runs-on: ubuntu-latest
     steps:
       - name: Print All Variables
         run: |
           env
   print-collected-data:
-    needs: run-script
+    needs: [run-script, print-variables]
     runs-on: ubuntu-latest
 
     steps:
