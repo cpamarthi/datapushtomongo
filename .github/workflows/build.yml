@@ -39,3 +39,4 @@ jobs:
            echo ${{ github.run_id}}
            echo ${{ github.ref }}
            echo ${{ needs.run-script.result }}
+           echo ${{ needs.run-script }}
