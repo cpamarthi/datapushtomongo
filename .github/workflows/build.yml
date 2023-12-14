@@ -21,3 +21,13 @@ jobs:
 
       - name: Run Python Script
         run: python test.py
+  print-collected-data:
+    needs: run-script
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Collect Data
+        run: |
+           echo ${{ github.event_name }}-${{ github.workflow }}
+           echo ${{ github.run_id}}
+           echo ${{ github.ref }}
