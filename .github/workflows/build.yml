@@ -28,6 +28,6 @@ jobs:
     steps:
       - name: Collect Data
         run: |
-           echo ${{ github.event_name }}-${{ github.workflow }}
+           echo ${{ github.workflow }}
            echo ${{ github.run_id}}
            echo ${{ github.ref }}
