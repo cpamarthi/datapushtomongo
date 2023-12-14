@@ -40,3 +40,5 @@ jobs:
            echo ${{ github.ref }}
            echo ${{ needs.run-script.result }}
            echo ${{ needs.run-script.created_at }}
+           echo ${{ github.run_created }}
+           echo ${{ github.run_updated }}
